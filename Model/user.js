@@ -25,4 +25,10 @@ User.prototype.getUserDetails = function () {
   return db.query(sql, [email, password]);
 };
 
+User.prototype.getUserRole = function () {
+  const { email } = this;
+  var sql = 'select role from users where email=?';
+  return db.query(sql, [email]);
+};
+
 module.exports = User;

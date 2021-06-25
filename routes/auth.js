@@ -1,12 +1,13 @@
 const express = require('express');
 const { createUser,getUserLogin,getUserDetails } = require('../Controller/authcontroller');
 const isAuthenticated = require('../middleware/checkAuth');
+const hasAdminAccess = require('../middleware/checkUserRole');
 const { validateCredentials } = require('../middleware/validateRequest');
 
 const router = express.Router();
 
 router.post('/signup',validateCredentials(),createUser);
 router.post('/login',validateCredentials(),getUserLogin);
-router.get('/get-user-details',isAuthenticated,getUserDetails);
+router.get('/get-user-details', isAuthenticated, hasAdminAccess, getUserDetails);
 
 module.exports=router;

@@ -13,9 +13,9 @@ const authHandler = {
   createUser: async (req, res) => {
     await createUserService(req, res);
   },
-  async getUserLogin(req, res) {
+  getUserLogin: async (req, res) => {
     const errors = validationResult(req).array()[0];
-    if (errors&&errors.length !== 0) {
+    if (errors && errors.length !== 0) {
       return response.sendFailureResponse(res, errors.msg, statusCodes.BAD_REQUEST);
     } else {
       const { email } = req.body;

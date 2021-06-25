@@ -6,13 +6,13 @@ const StandardResponse = require('../utils/responses');
 const response = new StandardResponse();
 
 const createSession = (userDetails) => {
-  const token = jwtTokenProvoider.createToken({...userDetails});
-  return { message:"user loged in", token };
+  const token = jwtTokenProvoider.createToken({ ...userDetails });
+  return { message: "user loged in", token };
 };
 
 async function getUserDetailsService(req, res) {
   const user = new User(req.body);
-  if(!user.email || !user.password){
+  if (!user.email || !user.password) {
     return response.sendFailureResponse(res, errorConstants.Invalid_Request_Data, statusCodes.BAD_REQUEST);
   }
   user
@@ -31,7 +31,7 @@ async function getUserDetailsService(req, res) {
 
 async function createUserService(req, res, next) {
   const user = new User(req.body);
-  if(!user.email || !user.password){
+  if (!user.email || !user.password) {
     return response.sendFailureResponse(res, errorConstants.Invalid_Request_Data, statusCodes.BAD_REQUEST);
   }
   user
@@ -68,5 +68,6 @@ async function getUserLoginService(req, res, next) {
       );
     });
 }
+
 
 module.exports = { getUserDetailsService, getUserLoginService, createUserService };
